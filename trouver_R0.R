@@ -37,7 +37,7 @@ find_R0 = function(){
   
   plot(c(1:5),real_result$I[1:5],type="p",col="black",
        xlab="Temps (heures)",ylab="Nombre de personnes malades",
-       main="Objectif : faire passer la ligne à travers tous les points !",
+       main="Objectif : faire passer la ligne\nà travers tous les points !",
        ylim=c(0,1000), bty="n", cex=1, pch=19,
        xlim = c(1,12), xaxt="n")
   axis(side = 1, at=c(1:12))
@@ -76,9 +76,11 @@ find_R0 = function(){
         break
       }
       
-      attempt = attempt+1
+      if(attempt > 2) cat("Indice : c'est entre 4 et 5...\n")
+      if(attempt > 3 & R0_to_try > 4.2) cat("C'est un peu moins...\n")
+      if(attempt > 3 & R0_to_try < 4.2) cat("C'est un peu plus...\n")
       
-      if(attempt == 5) cat("Indice : c'est entre 4 et 5...\n")
+      attempt = attempt+1
       
     }
   }

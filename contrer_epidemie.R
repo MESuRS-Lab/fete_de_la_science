@@ -40,12 +40,12 @@ find_perc = function(){
   
   plot(c(1:12),real_result$I,type="p",col="black",
        xlab="Temps (heures)",ylab="Nombre de personnes malades",
-       main="Objectif : rester sous la ligne en pointillés !",
+       main="Objectif : rester sous la ligne\nen pointillés !",
        ylim=c(0,1000), bty="n", cex=1, pch=19,
        xlim = c(1,12), xaxt="n")
   axis(side = 1, at=c(1:12))
-  abline(a=real_result$I[5],b=0, lty = "dashed", lwd=1)
-  
+  abline(h=real_result$I[5], lty = "dashed", lwd=1)
+
   attempt = 1
   
   perc_tried = c()
@@ -78,13 +78,16 @@ find_perc = function(){
         legend("topright", legend = perc_tried, col = colours[1:length(perc_tried)],
                lty = 1, lwd = 2)
         
-        if(perc_to_try %in% c(72:76)) cat("Un tout petit peu plus...\n")
-        if(perc_to_try %in% c(78:82)) cat("Un tout petit peu moins...\n")
         
         if(perc_to_try == 77){
           cat("Bravo ! C'est la bonne valeur")
           break
         }
+        
+        if(attempt > 2) cat("Indice : c'est entre 70 et 80%...\n")
+        if(attempt >2 & perc_to_try < 77) cat("Un petit peu plus...\n")
+        
+        if(perc_to_try > 77) cat("Ca fonctionne, mais il n'y a pas besoin d'une valeur aussi élevée\n")
         
         attempt = attempt+1
 
